@@ -11,10 +11,16 @@ private let reuseIdentifier = "imageCell"
 
 class DetailCollectionViewController: UICollectionViewController {
 
-	var userId: Int?
-	var images: [Image]?
-	let webClient = WebClient()
-	
+    var userId: Int?
+    var images: [Image]?
+    let webClient: WebClient
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.webClient = WebClient()
+        self.images = []
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
 		guard let userId = userId else {
 			fatalError()
