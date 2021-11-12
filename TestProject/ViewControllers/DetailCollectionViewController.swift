@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 private let reuseIdentifier = "imageCell"
 
@@ -25,17 +26,16 @@ class DetailCollectionViewController: UICollectionViewController {
 		guard let userId = userId else {
 			fatalError()
 		}
-
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        webClient.fetchImages(for: userId) { images in
+                           self.images = images
+                           DispatchQueue.main.sync {
+                               self.collectionView.reloadData()
+                           }
+                       }
 		
-		webClient.fetchImages(for: userId) { images in
-			self.images = images
-			DispatchQueue.main.sync {
-				self.collectionView.reloadData()
-			}
-		}
     }
 
     // MARK: UICollectionViewDataSource
