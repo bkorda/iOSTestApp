@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Kingfisher
+import SwiftUI
 
 protocol ImageCollectionViewCellDelegate: AnyObject {
 	func imageDownloaded()
@@ -18,16 +20,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
 	
 	var imageURL: URL! {
 		didSet {
-			downloadImage()
-		}
-	}
-	
-	private func downloadImage() {
-		if let data = try? Data(contentsOf: self.imageURL) {
-			if let image = UIImage(data: data) {
-				self.image.image = image
-				self.delegate?.imageDownloaded()
-			}
+            image.kf.setImage(with: self.imageURL)
 		}
 	}
 }

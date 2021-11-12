@@ -11,9 +11,15 @@ let cellIdentifier: String = "usercell"
 
 class UsersViewController: UITableViewController {
 	
-	private let webClient = WebClient()
-	private var users: [User]? = []
-
+    private let webClient: WebClient
+    private var users: [User]?
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.webClient = WebClient()
+        self.users = []
+        super.init(coder: aDecoder)
+    }
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view.
